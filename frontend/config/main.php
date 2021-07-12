@@ -1,4 +1,7 @@
 <?php
+
+use yii\rest\UrlRule;
+use yii\web\JsonParser;
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -14,6 +17,9 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' => [
+                'application/json' => JsonParser::class,
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -40,6 +46,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => UrlRule::class, 'controller' => ['post', 'comment'], 'pluralize' => false ],
+                [
+                    'pattern' => 'post/<postId:\d+>/comments',
+                    'route' => 'comment/index'
+                ]
             ],
         ],
     ],

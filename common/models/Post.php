@@ -29,6 +29,17 @@ class Post extends \yii\db\ActiveRecord
         return '{{%post}}';
     }
 
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+            [
+                'class' => BlameableBehavior::class,
+                'updatedByAttribute' => false
+            ]
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
