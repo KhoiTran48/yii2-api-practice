@@ -13,7 +13,7 @@ class Post extends \common\models\Post
 
     public function extraFields()
     {
-        return ['created_at', 'comments'];
+        return ['created_at', 'comments', 'createdBy'];
     }
 
     /**
